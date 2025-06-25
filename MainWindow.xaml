@@ -5,24 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <local:TileConverter x:Key="tileConverter"/>
     </Window.Resources>
-    <Grid>
-        <ListView ItemsSource="{Binding Columns}">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="A" DisplayMemberBinding="{Binding [0], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="B" DisplayMemberBinding="{Binding [1], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="C" DisplayMemberBinding="{Binding [2], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="D" DisplayMemberBinding="{Binding [3], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="E" DisplayMemberBinding="{Binding [4], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="F" DisplayMemberBinding="{Binding [5], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="G" DisplayMemberBinding="{Binding [6], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                    <GridViewColumn Header="H" DisplayMemberBinding="{Binding [7], Converter = {StaticResource tileConverter}}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <!-- i love stack https://stackoverflow.com/questions/1966258/chessboard-in-wpf -->
+    <ItemsControl ItemsSource="{Binding Tiles}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Rows="8" Columns="8"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border Background="{Binding Color}">
+                    <Image Source="{Binding PieceImage}"/>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </Window>
