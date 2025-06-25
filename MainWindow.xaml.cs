@@ -16,9 +16,12 @@ namespace chess
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Board board;
         public MainWindow()
         {
             InitializeComponent();
+            board = new Board();
+            DataContext = board;
         }
     }
 }

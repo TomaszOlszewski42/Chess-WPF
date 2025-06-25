@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:chess"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:TileConverter x:Key="tileConverter"/>
+    </Window.Resources>
     <Grid>
-
+        <ListView ItemsSource="{Binding Columns}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="A" DisplayMemberBinding="{Binding [0], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="B" DisplayMemberBinding="{Binding [1], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="C" DisplayMemberBinding="{Binding [2], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="D" DisplayMemberBinding="{Binding [3], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="E" DisplayMemberBinding="{Binding [4], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="F" DisplayMemberBinding="{Binding [5], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="G" DisplayMemberBinding="{Binding [6], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                    <GridViewColumn Header="H" DisplayMemberBinding="{Binding [7], Converter = {StaticResource tileConverter}}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
