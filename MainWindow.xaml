@@ -5,22 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800"
+        Title="Chess" Height="800" Width="800"
+        MinHeight="450" MinWidth="450"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style TargetType="Button" x:Key="NoHighlightButton">
+            <Setter Property="Background" Value="{Binding Color}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{Binding Color}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <!-- i love stack https://stackoverflow.com/questions/1966258/chessboard-in-wpf -->
-    <ItemsControl ItemsSource="{Binding Tiles}">
+    <ItemsControl ItemsSource="{Binding Tiles}" Name="MainContainer">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <UniformGrid Rows="8" Columns="8"/>
+                <UniformGrid Rows="8" Columns="8" Name="BoardGrid"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Border Background="{Binding Color}">
+                <Button Style="{StaticResource NoHighlightButton}" Click="TileClick">
                     <Image Source="{Binding PieceImage}"/>
-                </Border>
+                </Button>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

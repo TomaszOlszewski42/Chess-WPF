@@ -32,7 +32,19 @@ internal class Tile : INotifyPropertyChanged
 		}
 	}
 	public bool IsBlack { get; set; }
-	public SolidColorBrush Color { get; set; }
+	private SolidColorBrush _brush;
+	public SolidColorBrush Color 
+	{ 
+		get
+		{
+			return _brush;
+		}
+		set
+		{
+			_brush = value;
+			OnPropertyChanged(nameof(Color));
+		}
+	}
 	public BitmapImage? PieceImage 
 	{ 
 		get
