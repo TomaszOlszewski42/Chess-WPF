@@ -24,13 +24,13 @@ internal class Board
 			for (int j = 0; j < 8; j++)
 			{
 				if (i % 2 == 0 && j % 2 == 0)
-					TilesTable[i, j] = new Tile(false, Brushes.White);
+					TilesTable[i, j] = new Tile(false, Brushes.White, Brushes.Red);
 				else if (i % 2 == 0)
-					TilesTable[i, j] = new Tile(true, Brushes.Black);
+					TilesTable[i, j] = new Tile(true, Brushes.Black, Brushes.DarkRed);
 				else if (j % 2 == 0)
-					TilesTable[i, j] = new Tile(true, Brushes.Black);
+					TilesTable[i, j] = new Tile(true, Brushes.Black, Brushes.DarkRed);
 				else
-					TilesTable[i, j] = new Tile(false, Brushes.White);
+					TilesTable[i, j] = new Tile(false, Brushes.White, Brushes.Red);
 				Tiles.Add(TilesTable[i, j]);
 			}
 		}
@@ -41,5 +41,13 @@ internal class Board
 		pawn.CacheOption = BitmapCacheOption.OnLoad;
 		pawn.EndInit();
 		TilesTable[6, 0].ChessPiece = new ChessPiece(pawn, new PawnMovement(-1), PlayerEnum.White);
+
+		BitmapImage rook = new BitmapImage();
+		rook.BeginInit();
+		rook.UriSource = new Uri("..\\..\\..\\images\\white_rook.png", UriKind.Relative);
+		rook.CacheOption = BitmapCacheOption.OnLoad;
+		rook.EndInit();
+
+		TilesTable[7, 0].ChessPiece = new ChessPiece(rook, new RookMovement(), PlayerEnum.White);
 	}
 }

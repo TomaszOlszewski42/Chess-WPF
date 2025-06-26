@@ -12,10 +12,12 @@ namespace chess;
 
 internal class Tile : INotifyPropertyChanged
 {
-	public Tile(bool isBlack, SolidColorBrush brush)
+	public Tile(bool isBlack, SolidColorBrush default_brush, SolidColorBrush activ_brush)
 	{
 		IsBlack = isBlack;
-		Color = brush;
+		_defaultColor = default_brush;
+		_activatedColor = activ_brush;
+		_isActive = false;
 	}
 	ChessPiece? piece;
 	public ChessPiece? ChessPiece
@@ -32,17 +34,29 @@ internal class Tile : INotifyPropertyChanged
 		}
 	}
 	public bool IsBlack { get; set; }
-	private SolidColorBrush _brush;
+	private bool _isActive;
+	public bool IsActivated 
+	{ 
+		get
+		{
+			return _isActive;
+		}
+		set
+		{
+			_isActive = value;
+			OnPropertyChanged(nameof(Color));
+		}
+	}
+	private SolidColorBrush _defaultColor;
+	private SolidColorBrush _activatedColor;
 	public SolidColorBrush Color 
 	{ 
 		get
 		{
-			return _brush;
-		}
-		set
-		{
-			_brush = value;
-			OnPropertyChanged(nameof(Color));
+			if (!IsActivated)
+				return _defaultColor;
+			else
+				return _activatedColor;
 		}
 	}
 	public BitmapImage? PieceImage 

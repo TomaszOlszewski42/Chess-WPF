@@ -40,10 +40,10 @@ namespace chess
                 board.SelectedPiece = (board.TilesTable[row, col].ChessPiece, row, col);
                 var possible = board.SelectedPiece.Value.piece.PossibleMoves(board.TilesTable, col, row);
 				board.PossibleMoves = possible;
-                /*foreach (var tileee in possible)
+                foreach (var square in possible)
                 {
-                    tileee.Color = Brushes.Red;
-                }*/
+                    square.IsActivated = true;
+                }
 			}
             else
             {
@@ -52,6 +52,10 @@ namespace chess
                     var selected = board.SelectedPiece.Value;
                     board.TilesTable[row, col].ChessPiece = selected.piece;
                     board.TilesTable[selected.row, selected.col].ChessPiece = null;
+                }
+                foreach (var square in board.PossibleMoves)
+                {
+                    square.IsActivated = false;
                 }
 				board.SelectedPiece = null;
 				board.PossibleMoves = null;
