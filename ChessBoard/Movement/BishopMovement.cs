@@ -7,63 +7,39 @@ using System.Threading.Tasks;
 
 namespace chess;
 
-internal class BishopMovement : IMovement
+internal class BishopMovement : AbstractMovement
 {
-	public List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
+	public override List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
 	{
 		List<Tile> result = new List<Tile>();
 		PlayerEnum owner = tiles[start_y, start_x].ChessPiece.Owner;
 		
 		for (int i = 1; i < 8; i++)
 		{
-			if (start_x + i >= 0 && start_x + i < 8 && start_y + i >= 0 && start_y + i < 8)
-				if (tiles[start_y + i, start_x + i].ChessPiece == null)
-					result.Add(tiles[start_y + i, start_x + i]);
-				else
-				{
-					if (tiles[start_y + i, start_x + i].ChessPiece.Owner != owner)
-						result.Add(tiles[start_y + i, start_x + i]);
-					break;
-				}
+			var returned = CheckAddSquare(tiles, start_x, start_y, i, i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
 		for (int i = -1; i > -8; i--)
 		{
-			if (start_x + i >= 0 && start_x + i < 8 && start_y + i >= 0 && start_y + i < 8)
-				if (tiles[start_y + i, start_x + i].ChessPiece == null)
-					result.Add(tiles[start_y + i, start_x + i]);
-				else
-				{
-					if (tiles[start_y + i, start_x + i].ChessPiece.Owner != owner)
-						result.Add(tiles[start_y + i, start_x + i]);
-					break;
-				}
+			var returned = CheckAddSquare(tiles, start_x, start_y, i, i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
 		for (int i = 1; i < 8; i++)
 		{
-			if (start_x - i >= 0 && start_x - i < 8 && start_y + i >= 0 && start_y + i < 8)
-				if (tiles[start_y + i, start_x - i].ChessPiece == null)
-					result.Add(tiles[start_y + i, start_x - i]);
-				else
-				{
-					if (tiles[start_y + i, start_x - i].ChessPiece.Owner != owner)
-						result.Add(tiles[start_y + i, start_x - i]);
-					break;
-				}
+			var returned = CheckAddSquare(tiles, start_x, start_y, -i, i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
 		for (int i = -1; i > -8; i--)
 		{
-			if (start_x - i >= 0 && start_x - i < 8 && start_y + i >= 0 && start_y + i < 8)
-				if (tiles[start_y + i, start_x - i].ChessPiece == null)
-					result.Add(tiles[start_y + i, start_x - i]);
-				else
-				{
-					if (tiles[start_y + i, start_x - i].ChessPiece.Owner != owner)
-						result.Add(tiles[start_y + i, start_x - i]);
-					break;
-				}
+			var returned = CheckAddSquare(tiles, start_x, start_y, -i, i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
 		return result;

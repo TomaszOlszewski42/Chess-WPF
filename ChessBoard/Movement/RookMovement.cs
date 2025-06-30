@@ -6,51 +6,39 @@ using System.Threading.Tasks;
 
 namespace chess;
 
-internal class RookMovement : IMovement
+internal class RookMovement : AbstractMovement
 {
-	public List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
+	public override List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
 	{
 		List<Tile> result = new List<Tile>();
 		PlayerEnum owner = tiles[start_y, start_x].ChessPiece.Owner;
 
-		for (int i = start_x - 1; i >= 0; i--)
+		for (int i = 1; i < 8; i++)
 		{
-			if (tiles[start_y, i].ChessPiece == null)
-				result.Add(tiles[start_y, i]);
-			else if (tiles[start_y, i].ChessPiece.Owner != owner)
-				result.Add(tiles[start_y, i]);
-			else
-				break;
+			var returned = CheckAddSquare(tiles, start_x, start_y, i, 0, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
-		for (int i = start_x + 1; i < 8; i++)
+		for (int i = 1; i < 8; i++)
 		{
-			if (tiles[start_y, i].ChessPiece == null)
-				result.Add(tiles[start_y, i]);
-			else if (tiles[start_y, i].ChessPiece.Owner != owner)
-				result.Add(tiles[start_y, i]);
-			else
-				break;
+			var returned = CheckAddSquare(tiles, start_x, start_y, -i, 0, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
-		for (int i = start_y - 1; i >= 0; i--)
+		for (int i = 1; i < 8; i++)
 		{
-			if (tiles[i, start_x].ChessPiece == null)
-				result.Add(tiles[i, start_x]);
-			else if (tiles[i, start_x].ChessPiece.Owner != owner)
-				result.Add(tiles[start_y, i]);
-			else
-				break;
+			var returned = CheckAddSquare(tiles, start_x, start_y, 0, i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
-		for (int i = start_y + 1; i < 8; i++)
+		for (int i = 1; i < 8; i++)
 		{
-			if (tiles[i, start_x].ChessPiece == null)
-				result.Add(tiles[i, start_x]);
-			else if (tiles[i, start_x].ChessPiece.Owner != owner)
-				result.Add(tiles[start_y, i]);
-			else
-				break;
+			var returned = CheckAddSquare(tiles, start_x, start_y, 0, -i, owner, result);
+			if (returned == null) break;
+			if (returned.Value) break;
 		}
 
 		return result;

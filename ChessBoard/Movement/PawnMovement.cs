@@ -1,6 +1,6 @@
 ﻿namespace chess;
 
-class PawnMovement : IMovement
+class PawnMovement : AbstractMovement
 {
 	private int _direction;
 
@@ -9,7 +9,7 @@ class PawnMovement : IMovement
 		_direction = direction;
 	}
 
-	public List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
+	public override List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
 	{
 		List<Tile> result = new List<Tile>();
 
