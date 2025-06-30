@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace chess;
+﻿namespace chess;
 
 class PawnMovement : IMovement
 {
@@ -19,7 +13,7 @@ class PawnMovement : IMovement
 	{
 		List<Tile> result = new List<Tile>();
 
-		if (tiles[start_y + _direction, start_x].ChessPiece == null)
+		if (start_y + _direction < 8 && start_y + _direction >= 0 && tiles[start_y + _direction, start_x].ChessPiece == null)
 			result.Add(tiles[start_y + _direction, start_x]);
 
 		return result;

@@ -11,11 +11,13 @@ internal class RookMovement : IMovement
 	public List<Tile> PossibleMoves(Tile[,] tiles, int start_x, int start_y)
 	{
 		List<Tile> result = new List<Tile>();
+		PlayerEnum owner = tiles[start_y, start_x].ChessPiece.Owner;
+
 		for (int i = start_x - 1; i >= 0; i--)
 		{
 			if (tiles[start_y, i].ChessPiece == null)
 				result.Add(tiles[start_y, i]);
-			else if (tiles[start_y, i].ChessPiece.Owner != tiles[start_y, start_x].ChessPiece.Owner)
+			else if (tiles[start_y, i].ChessPiece.Owner != owner)
 				result.Add(tiles[start_y, i]);
 			else
 				break;
@@ -25,7 +27,7 @@ internal class RookMovement : IMovement
 		{
 			if (tiles[start_y, i].ChessPiece == null)
 				result.Add(tiles[start_y, i]);
-			else if (tiles[start_y, i].ChessPiece.Owner != tiles[start_y, start_x].ChessPiece.Owner)
+			else if (tiles[start_y, i].ChessPiece.Owner != owner)
 				result.Add(tiles[start_y, i]);
 			else
 				break;
@@ -35,7 +37,7 @@ internal class RookMovement : IMovement
 		{
 			if (tiles[i, start_x].ChessPiece == null)
 				result.Add(tiles[i, start_x]);
-			else if (tiles[i, start_x].ChessPiece.Owner != tiles[start_y, start_x].ChessPiece.Owner)
+			else if (tiles[i, start_x].ChessPiece.Owner != owner)
 				result.Add(tiles[start_y, i]);
 			else
 				break;
@@ -45,7 +47,7 @@ internal class RookMovement : IMovement
 		{
 			if (tiles[i, start_x].ChessPiece == null)
 				result.Add(tiles[i, start_x]);
-			else if (tiles[i, start_x].ChessPiece.Owner != tiles[start_y, start_x].ChessPiece.Owner)
+			else if (tiles[i, start_x].ChessPiece.Owner != owner)
 				result.Add(tiles[start_y, i]);
 			else
 				break;
