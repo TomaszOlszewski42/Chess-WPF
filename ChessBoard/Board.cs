@@ -49,10 +49,27 @@ internal class Board
 		BitmapImage b_knight = LoadImage("..\\..\\..\\images\\black_knight.png");
 
 
+		for (int i = 0; i < 8; i++)
+			TilesTable[6, i].ChessPiece = new ChessPiece(w_pawn, new PawnMovement(-1), PlayerEnum.White);
 		TilesTable[7, 0].ChessPiece = new ChessPiece(w_rook, new RookMovement(), PlayerEnum.White);
+		TilesTable[7, 7].ChessPiece = new ChessPiece(w_rook, new RookMovement(), PlayerEnum.White);
+		TilesTable[7, 1].ChessPiece = new ChessPiece(w_knight, new KnightMovement(), PlayerEnum.White);
+		TilesTable[7, 6].ChessPiece = new ChessPiece(w_knight, new KnightMovement(), PlayerEnum.White);
 		TilesTable[7, 2].ChessPiece = new ChessPiece(w_bishop, new BishopMovement(), PlayerEnum.White);
+		TilesTable[7, 5].ChessPiece = new ChessPiece(w_bishop, new BishopMovement(), PlayerEnum.White);
 		TilesTable[7, 3].ChessPiece = new ChessPiece(w_queen, new QueenMovement(), PlayerEnum.White);
-		TilesTable[4, 3].ChessPiece = new ChessPiece(w_knight, new KnightMovement(), PlayerEnum.White);
+		TilesTable[7, 4].ChessPiece = new ChessPiece(w_king, new KingMovement(), PlayerEnum.White);
+
+		for (int i = 0; i < 8; i++)
+			TilesTable[1, i].ChessPiece = new ChessPiece(b_pawn, new PawnMovement(1), PlayerEnum.Black);
+		TilesTable[0, 0].ChessPiece = new ChessPiece(b_rook, new RookMovement(), PlayerEnum.Black);
+		TilesTable[0, 7].ChessPiece = new ChessPiece(b_rook, new RookMovement(), PlayerEnum.Black);
+		TilesTable[0, 1].ChessPiece = new ChessPiece(b_knight, new KnightMovement(), PlayerEnum.Black);
+		TilesTable[0, 6].ChessPiece = new ChessPiece(b_knight, new KnightMovement(), PlayerEnum.Black);
+		TilesTable[0, 2].ChessPiece = new ChessPiece(b_bishop, new BishopMovement(), PlayerEnum.Black);
+		TilesTable[0, 5].ChessPiece = new ChessPiece(b_bishop, new BishopMovement(), PlayerEnum.Black);
+		TilesTable[0, 3].ChessPiece = new ChessPiece(b_queen, new QueenMovement(), PlayerEnum.Black);
+		TilesTable[0, 4].ChessPiece = new ChessPiece(b_king, new KingMovement(), PlayerEnum.Black);
 	}
 
 	private BitmapImage LoadImage(string path)
